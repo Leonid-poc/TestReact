@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
 import Users from "./components/Users";
+import AddUser from "./components/AddUser";
 
 class App extends React.Component {
 	constructor(props) {
@@ -36,6 +37,9 @@ class App extends React.Component {
 			<div>
                 <Header text="List of Users" />
 				<Users users={this.state.users} />
+				<aside>
+					<AddUser />
+				</aside>
 			</div>
 		)
 	}

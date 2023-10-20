@@ -17,7 +17,8 @@ body {
 }
 
 .users {
-    float: left
+    float: left;
+    width: 50%;
 }
 
 .userInfo {
@@ -30,4 +31,36 @@ body {
 
 .userPrice {
     text-align: end;
+}
+aside {
+    width: 25%;
+    float: left;
+}
+aside form {
+    color: #fff;
+    background-color: rgb(36, 18, 64);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+aside form input:not([type="checkbox"]), aside form button {
+    padding: 10px;
+    background-color: rgb(43, 43, 43);
+    -webkit-text-fill-color: #fff;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+aside form input[type="checkbox"] {
+    transform: scale(1.1);
+}
+
+aside form button {
+    transition: transform .5s ease;
+}
+
+aside form button:hover {
+    transform: scale(1.05);
 }

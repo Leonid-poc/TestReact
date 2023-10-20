@@ -8,8 +8,7 @@ class AddUser extends React.Component {
                 <input type="text" placeholder="Фамилия"/>
                 <input type="text" placeholder="О Себе"/>
                 <input type="text" placeholder="Возраст"/>
-                <label htmlFor="Happy">Бесценный?</label>
-                <input type="checkbox" id="Happy"/>
+                <label htmlFor="Happy">Бесценный?  <input type="checkbox" id="Happy"/></label>
                 <button type="button">Добавить</button>
             </form>
         );
