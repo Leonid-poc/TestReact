@@ -14,7 +14,7 @@ class App extends React.Component {
 			price: "infinity"
 		},
 		{
-			id: 0,
+			id: 1,
 			firstName: "Alina",
 			lastName: "Vildanova",
 			age: 18,
@@ -28,13 +28,22 @@ class App extends React.Component {
 			users: this.users
 		}
 		this.addingUser = this.addingUser.bind(this);
+		this.deleteUser = this.deleteUser.bind(this);
+		this.ids = this.users.length;
 	}
 
 	addingUser(user) {
-		user.id = this.users.length;
+		user.id = this.ids;
 		console.log(user);
 		this.users.push(user);
 		this.setState({users: this.users});
+		this.ids++;
+	}
+
+	deleteUser(user_id) {
+		console.log(user_id);
+		this.users = this.users.filter(el => el.id !== user_id)
+		this.setState({users: this.users})
 	}
 
 	render() {
@@ -42,7 +51,7 @@ class App extends React.Component {
 			<div>
                 <Header text="List of Users" />
 				<main>
-					<Users users={this.state.users} key={9999} />
+					<Users users={this.state.users} onDelete={this.deleteUser} key={9999} />
 				</main>
 				<aside>
 					<AddUser add={this.addingUser} key={9998} />
