@@ -11,7 +11,7 @@ class App extends React.Component {
 			lastName: "Georg",
 			age: 19,
 			bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, ducimus.",
-			price: "infinity"
+			price: true
 		},
 		{
 			id: 1,
@@ -19,7 +19,7 @@ class App extends React.Component {
 			lastName: "Vildanova",
 			age: 18,
 			bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, ducimus.",
-			price: "infinity"
+			price: true,
 		}
 	]
 	constructor(props) {
@@ -29,19 +29,26 @@ class App extends React.Component {
 		}
 		this.addingUser = this.addingUser.bind(this);
 		this.deleteUser = this.deleteUser.bind(this);
+		this.editUser = this.editUser.bind(this);
 		this.ids = this.users.length;
 	}
 
 	addingUser(user) {
 		user.id = this.ids;
-		console.log(user);
 		this.users.push(user);
 		this.setState({users: this.users});
 		this.ids++;
 	}
 
+	editUser(user) {
+		this.users = this.users.filter(el => el.id !== user.id);
+		this.users.push(user);
+		this.setState({users: []}, () => {
+			this.setState({users: this.users});
+		});
+	}
+
 	deleteUser(user_id) {
-		console.log(user_id);
 		this.users = this.users.filter(el => el.id !== user_id)
 		this.setState({users: this.users})
 	}
@@ -51,10 +58,10 @@ class App extends React.Component {
 			<div>
                 <Header text="List of Users" />
 				<main>
-					<Users users={this.state.users} onDelete={this.deleteUser} key={9999} />
+					<Users users={this.state.users} onEdit={this.editUser} onDelete={this.deleteUser} key={9999} />
 				</main>
 				<aside>
-					<AddUser add={this.addingUser} key={9998} />
+					<AddUser add={this.addingUser} key={9998}/>
 				</aside>
 			</div>
 		)
