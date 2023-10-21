@@ -14,10 +14,10 @@ class AddUser extends React.Component {
 
     render() {
         return (
-            <form>
+            <form className="formAddUser">
                 <input type="text" onChange={(e) => {this.setState({firstName: e.target.value})}} placeholder="Имя"/>
                 <input type="text" onChange={(e) => {this.setState({lastName: e.target.value})}} placeholder="Фамилия"/>
-                <input type="text" onChange={(e) => {this.setState({bio: e.target.value})}} placeholder="О Себе"/>
+                <textarea onChange={(e) => {this.setState({bio: e.target.value})}} placeholder="О Себе"/>
                 <input type="text" onChange={(e) => {this.setState({age: e.target.value})}} placeholder="Возраст"/>
                 <label htmlFor="Price">Бесценный?  <input type="checkbox" id="Price"onChange={(e) => {this.setState({price: e.target.checked ? "Infinity" : "0$"})}}/></label>
                 <button type="button" onClick={() => {this.props.add({
