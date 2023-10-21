@@ -36,7 +36,7 @@ aside {
     width: 25%;
     float: left;
 }
-aside form {
+.formAddUser {
     color: #fff;
     background-color: rgb(36, 18, 64);
     border-radius: 20px;
@@ -45,22 +45,34 @@ aside form {
     gap: 10px;
     padding: 20px;
 }
-aside form input:not([type="checkbox"]), aside form button {
+.formAddUser input:not([type="checkbox"]), .formAddUser button, .formAddUser textarea{
     padding: 10px;
     background-color: rgb(43, 43, 43);
     -webkit-text-fill-color: #fff;
     border: 1px solid red;
     border-radius: 10px;
+    max-width: 100%;
 }
 
-aside form input[type="checkbox"] {
+.formAddUser input[type="checkbox"] {
     transform: scale(1.1);
 }
 
-aside form button {
+.formAddUser button {
     transition: transform .5s ease;
 }
 
-aside form button:hover {
+.formAddUser button:hover {
     transform: scale(1.05);
+}
+
+.EventBut {
+    margin-left: 10px;
+    float: right;
+    transform: scale(1.5);
+    opacity: .7;
+}
+
+.EventBut:hover {
+    opacity: 1;
 }
