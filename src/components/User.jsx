@@ -19,8 +19,8 @@ class User extends React.Component {
                 <h3>{this.userinfo.lastName} {this.userinfo.firstName}</h3>
                 <p>{this.userinfo.bio.length > 100 ? this.userinfo.bio.substring(0, 100) + '...' : this.userinfo.bio}</p>
                 <hr></hr>
-                <div className="userPrice">Price: {this.userinfo.price}</div>
-                {this.state.editing ? <AddUser/> : ""}
+                <div className="userPrice">Price: {this.userinfo.price ? "Infinity" : "0$"}</div>
+                {this.state.editing && <AddUser editing={true} edit={this.props.onEdit} user_info={this.userinfo}/>}
             </div>
         )
     }

@@ -51,7 +51,6 @@ aside {
     -webkit-text-fill-color: #fff;
     border: 1px solid red;
     border-radius: 10px;
-    max-width: 100%;
 }
 
 .formAddUser input[type="checkbox"] {
