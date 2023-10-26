@@ -33,12 +33,11 @@ const users = [
 const App = (props) => {
 	const [humans, setHumans] = useState(users);
 	// setState(prev => {return [...prev, users]});
-	let ids = users.length;
 
 	const addingUser = (user) => {
-		user.id = ids;
+		user.id = humans.length;
 		setHumans([...humans, user]);
-		ids++;
+		
 	}
 
 	const editUser = (user) => {
