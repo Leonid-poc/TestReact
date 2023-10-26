@@ -1,44 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AddUser = (props) => {
-    const [state, setState] = useState('');
-    let myForm;
-    if (props.editing) {
-        setState({
-            id: props.user_info.id,
-            firstName: props.user_info.firstName,
-            lastName: props.user_info.lastName,
-            age: props.user_info.age,
-            bio: props.user_info.bio,
-            price: props.user_info.price,
-        });
-    }
     const shablon = {
         id: -1,
         firstName: '',
         lastName: '',
         age: '',
         bio: '',
-        price: '0$'
+        price: false
     }
-    
+    const [state, setState] = useState(shablon);
+    let myForm;
+    useEffect(() => {
+        if (props.editing) {
+            setState({
+                id: props.user_info.id,
+                firstName: props.user_info.firstName,
+                lastName: props.user_info.lastName,
+                age: props.user_info.age,
+                bio: props.user_info.bio,
+                price: props.user_info.price,
+            });
+        }
+    }, [props.editing]);
+
 
     const addUser = () => {
         props.add(state);
     }
 
     const editUser = () => {
-        props.edit(state);
+        props.onClose();
+        props.edit2(state);
     }
 
     return (
         <form className="formAddUser" ref={(el) => myForm = el}>
-            <input type="text" onChange={(e) => {setState({firstName: e.target.value})}} placeholder={props.editing ? props.user_info.firstName : "Имя"}/>
-            <input type="text" onChange={(e) => {setState({lastName: e.target.value})}} placeholder={props.editing ? props.user_info.lastName : "Фамилия"}/>
-            <textarea onChange={(e) => {setState({bio: e.target.value})}} placeholder={props.editing ? props.user_info.bio : "О Себе"}/>
-            <input type="text" onChange={(e) => {setState({age: e.target.value})}} placeholder={props.editing ? props.user_info.age : "Возраст"}/>
+            <input type="text" onChange={(e) => {setState({...state, firstName: e.target.value})}} placeholder={props.editing ? props.user_info.firstName : "Имя"}/>
+            <input type="text" onChange={(e) => {setState({...state, lastName: e.target.value})}} placeholder={props.editing ? props.user_info.lastName : "Фамилия"}/>
+            <textarea onChange={(e) => {setState({...state, bio: e.target.value})}} placeholder={props.editing ? props.user_info.bio : "О Себе"}/>
+            <input type="text" onChange={(e) => {setState({...state, age: e.target.value})}} placeholder={props.editing ? props.user_info.age : "Возраст"}/>
             <label htmlFor="Price">
-                Бесценный? <input type="checkbox" checked={(props.editing && props.user_info.price)} id="Price"onChange={(e) => {setState({price: e.target.checked})}}/>
+                Бесценный? <input type="checkbox" checked={(props.editing && props.user_info.price)} id="Price" onChange={(e) => {setState({...state, price: e.target.checked})}}/>
             </label>
             <button type="button" onClick={() => {
                 myForm.reset();
@@ -49,7 +52,9 @@ const AddUser = (props) => {
                     bio: state.bio,
                     age: state.age
                 });
-                props.editing ? editUser() : addUser();}}>{!props.editing ? "Добавить" : "Изменить"}
+                props.editing ? editUser() : addUser();
+                setState(shablon);
+                }}>{!props.editing ? "Добавить" : "Изменить"}
             </button>
         </form>
     );

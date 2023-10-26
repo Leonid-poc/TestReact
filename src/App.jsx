@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Users from "./components/Users";
 import AddUser from "./components/AddUser";
 
-let users = [
+const users = [
 	{
 		id: 0,
 		firstName: "Leonid",
@@ -19,62 +19,45 @@ let users = [
 		age: 18,
 		bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, ducimus.",
 		price: true,
+	},
+	{
+		id: 2,
+		firstName: "Olga",
+		lastName: "Georg",
+		age: 43,
+		bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, ducimus.",
+		price: true,
 	}
-]
+];
 
 const App = (props) => {
-	const [state, setState] = useState(users);
+	const [humans, setHumans] = useState(users);
 	// setState(prev => {return [...prev, users]});
-	let ids = users.length;
-	useEffect(() => {
-		setState({users: users})
-	});
-	// console.log(state);
-	// React.useEffect(() => {
-	// 	(async () => {
-	// 		try {
-	// 			const data = await axios.get;
-	// 			setState(prev => [...prev, ...data.data])
-	// 		} catch (err) {
-	// 			return console.log(err);
-	// 		}
-	// 	})()
-	// })
 
 	const addingUser = (user) => {
-		user.id = ids;
-		users.push(user);
-		// useEffect(() => {
-		// });
-		setState({users: users});
-		ids++;
+		user.id = humans.length;
+		setHumans([...humans, user]);
+		
 	}
 
 	const editUser = (user) => {
-		users = users.filter(el => el.id !== user.id);
-		users.push(user);
-		// useEffect(() => {
-		// });
-		setState({users: []}, () => {
-			setState({users: users});
-		});
+		// users = users.filter(el => el.id !== user.id);
+		// users.push(user);
+		setHumans([...humans.filter(el => el.id !== user.id), user])
 	}
 
 	const deleteUser = (user_id) => {
-		users = users.filter(el => el.id !== user_id);
-		// useEffect(() => {
-		// });
-		setState({users: users});
+		setHumans(() => [...humans.filter(el => el.id !== user_id)]);
 	}
 
 	return (
 		<div>
 			<Header text="List of Users" />
 			<main>
-				<Users users={state} onEdit={editUser} onDelete={deleteUser} key={9999} />
+				<Users users={humans} onEdit={editUser} onDelete={deleteUser}/>
 			</main>
 			<aside>
-				<AddUser add={addingUser} key={9998}/>
+				<AddUser add={addingUser}/>
 			</aside>
 		</div>
 	)
