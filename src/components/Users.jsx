@@ -6,7 +6,6 @@ const Users = (props) => {
     useEffect(() => {
         setAllUsers(props.users);
     });
-    
     return (
         <div className="users">
             {
