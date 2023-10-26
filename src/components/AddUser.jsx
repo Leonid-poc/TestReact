@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 const AddUser = (props) => {
-    const [state, setState] = useState('');
+    const shablon = {
+        id: -1,
+        firstName: '',
+        lastName: '',
+        age: '',
+        bio: '',
+        price: false
+    }
+    const [state, setState] = useState(shablon);
     let myForm;
     if (props.editing) {
         setState({
@@ -12,14 +20,6 @@ const AddUser = (props) => {
             bio: props.user_info.bio,
             price: props.user_info.price,
         });
-    }
-    const shablon = {
-        id: -1,
-        firstName: '',
-        lastName: '',
-        age: '',
-        bio: '',
-        price: '0$'
     }
     
 
@@ -33,12 +33,12 @@ const AddUser = (props) => {
 
     return (
         <form className="formAddUser" ref={(el) => myForm = el}>
-            <input type="text" onChange={(e) => {setState({firstName: e.target.value})}} placeholder={props.editing ? props.user_info.firstName : "Имя"}/>
-            <input type="text" onChange={(e) => {setState({lastName: e.target.value})}} placeholder={props.editing ? props.user_info.lastName : "Фамилия"}/>
-            <textarea onChange={(e) => {setState({bio: e.target.value})}} placeholder={props.editing ? props.user_info.bio : "О Себе"}/>
-            <input type="text" onChange={(e) => {setState({age: e.target.value})}} placeholder={props.editing ? props.user_info.age : "Возраст"}/>
+            <input type="text" onChange={(e) => {setState({...state, firstName: e.target.value})}} placeholder={props.editing ? props.user_info.firstName : "Имя"}/>
+            <input type="text" onChange={(e) => {setState({...state, lastName: e.target.value})}} placeholder={props.editing ? props.user_info.lastName : "Фамилия"}/>
+            <textarea onChange={(e) => {setState({...state, bio: e.target.value})}} placeholder={props.editing ? props.user_info.bio : "О Себе"}/>
+            <input type="text" onChange={(e) => {setState({...state, age: e.target.value})}} placeholder={props.editing ? props.user_info.age : "Возраст"}/>
             <label htmlFor="Price">
-                Бесценный? <input type="checkbox" checked={(props.editing && props.user_info.price)} id="Price"onChange={(e) => {setState({price: e.target.checked})}}/>
+                Бесценный? <input type="checkbox" checked={(props.editing && props.user_info.price)} id="Price" onChange={(e) => {setState({...state, price: e.target.checked})}}/>
             </label>
             <button type="button" onClick={() => {
                 myForm.reset();
