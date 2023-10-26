@@ -11,24 +11,27 @@ const AddUser = (props) => {
     }
     const [state, setState] = useState(shablon);
     let myForm;
-    if (props.editing) {
-        setState({
-            id: props.user_info.id,
-            firstName: props.user_info.firstName,
-            lastName: props.user_info.lastName,
-            age: props.user_info.age,
-            bio: props.user_info.bio,
-            price: props.user_info.price,
-        });
-    }
-    
+    useEffect(() => {
+        if (props.editing) {
+            setState({
+                id: props.user_info.id,
+                firstName: props.user_info.firstName,
+                lastName: props.user_info.lastName,
+                age: props.user_info.age,
+                bio: props.user_info.bio,
+                price: props.user_info.price,
+            });
+        }
+    }, [props.editing]);
+
 
     const addUser = () => {
         props.add(state);
     }
 
     const editUser = () => {
-        props.edit(state);
+        props.onClose();
+        props.edit2(state);
     }
 
     return (
@@ -49,7 +52,9 @@ const AddUser = (props) => {
                     bio: state.bio,
                     age: state.age
                 });
-                props.editing ? editUser() : addUser();}}>{!props.editing ? "Добавить" : "Изменить"}
+                props.editing ? editUser() : addUser();
+                setState(shablon);
+                }}>{!props.editing ? "Добавить" : "Изменить"}
             </button>
         </form>
     );
